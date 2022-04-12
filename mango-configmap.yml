@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: configmap
+metadata:
+  name: mango-configmap
+data:
+  database_url: mangodb-ser
