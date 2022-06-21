@@ -2,39 +2,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: mango-exp
+  name: mongo-exp
   labels:
-    app: mangp-exp
+    app: mongp-exp
 spec: 
   replicas: 1
   selector: 
     matchLabels:
-      app: mango-exp
+      app: mongo-exp
   template:
     metadata:
-      lables: 
-        app: mang-exp
+      labels: 
+        app: mongo-exp
     spec: 
       containers:
-       - name: mango-exp
-         image: mango-express
+       - name: mongo-exp
+         image: mongo-express
          ports:
           - containerPort: 8081
          env:
-          - name: ME_CONFIG_MANGODB_ADMINUSERNAME
-            valuefrom:
-              secretkeyRef:
-                name: mango-secret
-                key: mango-root-username
-          - name: ME_CONFIG_MANGODB_ADMINPASSWORD
-            valuefrom:
-              secretkeyRef:
-                name: mango-secret
-                key: mango-root-password
-          - name: ME_CONGIFG_MANGODB_SERVER
-            valuefrom:
-              secretkeyRef:
-                name: mango-configmap
+          - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: mongo-root-username
+          - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: mongo-root-password
+          - name: ME_CONGIFG_MONGODB_SERVER
+            valueFrom:
+              secretKeyRef:
+                name: mongo-configmap
                 key: database_url
 
 
@@ -42,10 +42,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata: 
-  name: mango-exp-ser
+  name: mongo-exp-ser
 spec:
   selector:
-    app: mango-exp
+    app: mongo-exp
   type: LoadBalancer
   ports:
    - protocol: TCP

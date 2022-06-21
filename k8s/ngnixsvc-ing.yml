@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1 #networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginxsvc-ing
+  #annotations: 
+  #   nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    host: dep-nginx
+    http:
+      paths:
+      - path: /
+        pathType: prefix
+        backend:
+          service: 
+            name: nginx-serviice
+            port: 
+              number: 80
+      - path: /
+        pathType: prefix
+        backend:
+          service:
+            name: nginx-serviice
+            port:
+              number: 8080
+
